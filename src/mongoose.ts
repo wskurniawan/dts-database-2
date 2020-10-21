@@ -16,7 +16,15 @@ export type CustomerDocument = mongoose.Document & CustomerType
 
 //schema definition
 const CustomerSchema = new mongoose.Schema({
-
+  first_name: String,
+	last_name: String,
+	age: Number,
+	customer_type: String,
+	street: String,
+	city: String,
+	state: String,
+	zip_code: String,
+	phone_number: String
 })
 
 export class Customer {
@@ -26,8 +34,13 @@ export class Customer {
     this.model = mongoose.model('customer', CustomerSchema)
   }
 
-  async create() {
-
+  async create(data: CustomerType) {
+    try {
+      const result = await this.model.create(data)
+      console.log(`Insert result %j`, result)
+    } catch (error) {
+      throw error
+    }
   }
 
   async getAll() {
