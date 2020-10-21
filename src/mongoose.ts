@@ -44,18 +44,40 @@ export class Customer {
   }
 
   async getAll() {
+    let customers: CustomerType[]
+    try {
+      customers = await this.model.find({})
+    } catch (error) {
+      throw error
+    }
 
+    return customers
   }
 
-  async getByID() {
-    
+  async getByID(customerID: string) {
+    let customer: CustomerType | null
+    try {
+      customer = await this.model.findById(customerID)
+    } catch (error) {
+      throw error
+    }
+
+    return customer
   }
 
-  async update() {
-
+  async update(customerID: string, data: Partial<CustomerType>) {
+    try {
+      await this.model.findByIdAndUpdate(customerID, { $set: data })
+    } catch (error) {
+      throw error
+    }
   }
 
-  async delete() {
-
+  async delete(customerID: string) {
+    try {
+      await this.model.findByIdAndDelete(customerID)
+    } catch (error) {
+      throw error
+    }
   }
 }
