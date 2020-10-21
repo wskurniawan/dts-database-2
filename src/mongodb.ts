@@ -10,7 +10,6 @@ export type CustomerType = {
 	state: string
 	zip_code: string
 	phone_number: string
-
 }
 
 export class Customer {
