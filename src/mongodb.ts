@@ -60,7 +60,11 @@ export class Customer {
   }
 
 
-  async delete() {
-
+  async delete(customerID: string) {
+    try {
+      await this.collection.deleteOne({ _id: customerID })
+    } catch (error) {
+      throw error
+    }
   }
 }

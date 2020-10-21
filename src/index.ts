@@ -61,8 +61,14 @@ async function initApp() {
     res.send({ success: true })
   })
 
-  app.delete('/customer', function(req, res, next) {
+  app.delete('/customer/:id', async function(req, res, next) {
+    try {
+      await customerModel.delete(req.params.id)
+    } catch (error) {
+      return next(error)
+    }
 
+    res.send({ success: true })
   })
 
   app.use(function(err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
