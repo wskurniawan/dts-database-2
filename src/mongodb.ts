@@ -51,8 +51,12 @@ export class Customer {
     return customer
   }
 
-  async update() {
-
+  async update(customerID: string, updateData: Partial<CustomerType>) {
+    try {
+      await this.collection.updateOne({ _id: customerID }, { $set: updateData })
+    } catch (error) {
+      throw error
+    }
   }
 
 

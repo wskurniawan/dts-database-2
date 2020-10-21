@@ -51,8 +51,14 @@ async function initApp() {
     return res.send(customer)
   })
 
-  app.put('/customer', function(req, res, next) {
+  app.put('/customer/:id', async function(req, res, next) {
+    try {
+      await customerModel.update(req.params.id, req.body)
+    } catch (error) {
+      return next(error)
+    }
 
+    res.send({ success: true })
   })
 
   app.delete('/customer', function(req, res, next) {
