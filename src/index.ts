@@ -20,7 +20,7 @@ async function initApp() {
 
   })
 
-  app.get('/cutomer/:id', function(req, res, next) {
+  app.get('/customer/:id', function(req, res, next) {
 
   })
 
