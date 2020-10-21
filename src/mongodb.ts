@@ -30,7 +30,14 @@ export class Customer {
   }
 
   async getAll() {
-    
+    let customers: CustomerType[]
+    try {
+      customers = await this.collection.find().toArray()
+    } catch (error) {
+      throw error
+    }
+
+    return customers
   }
 
   async getByID() {
