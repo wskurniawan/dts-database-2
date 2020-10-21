@@ -36,6 +36,13 @@ async function initApp() {
 
   })
 
+  app.use(function(err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
+    res.status(500).send({
+      success: false,
+      message: err.message
+    })
+  })
+
   app.listen(process.env.PORT || 8000, () => {
     console.log(`App listen on port ${ process.env.PORT || 8000 }`)
   })
