@@ -42,7 +42,7 @@ export class Customer {
   async getByID(customerID: string) {
     let customer: CustomerType | null
     try {
-      customer = await this.collection.findOne({ _id: customerID })
+      customer = await this.collection.findOne({ _id: new mongodb.ObjectID(customerID) })
     } catch (error) {
       throw error
     }
@@ -52,7 +52,7 @@ export class Customer {
 
   async update(customerID: string, updateData: Partial<CustomerType>) {
     try {
-      await this.collection.updateOne({ _id: customerID }, { $set: updateData })
+      await this.collection.updateOne({ _id: new mongodb.ObjectID(customerID) }, { $set: updateData })
     } catch (error) {
       throw error
     }
@@ -61,7 +61,7 @@ export class Customer {
 
   async delete(customerID: string) {
     try {
-      await this.collection.deleteOne({ _id: customerID })
+      await this.collection.deleteOne({ _id: new mongodb.ObjectID(customerID) })
     } catch (error) {
       throw error
     }
